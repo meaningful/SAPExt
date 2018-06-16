@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+    <!-- The jQuery library is a prerequisite for all jqSuite products -->
+    <script type="text/ecmascript" src="js/jquery-1.11.0.min.js"></script>
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="js/i18n/grid.locale-cn.js"></script>
+    <!-- This is the Javascript file of jqGrid -->
+    <script type="text/ecmascript" src="js/jquery.jqGrid.min.js"></script>
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid-bootstrap-ui.css" />
+    <!-- The link to the CSS that the grid needs -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" />
+
+<title>test</title>
+</head>
+<body>
+
+    <table id="navgrid"></table>
+    <div id="pagernav"></div>
+
+    <script type="text/javascript">
+
+    $(function(){
+    	  pageInit();
+    	});
+    	function pageInit(){
+    	  jQuery("#navgrid").jqGrid(
+    	      {
+    	        url : '/Loadgrid',
+    	        datatype : "json",
+    	        colNames : [ 'Inv No', 'Date', 'Client', 'Amount', 'Tax',
+    	            'Total', 'Closed', 'Ship via', 'Notes' ],
+    	        colModel : [
+    	                    {name : 'id',index : 'id',width : 55,editable : false,editoptions : {readonly : true,size : 10}},
+    	                    {name : 'invdate',index : 'invdate',width : 80,editable : true,editoptions : {size : 10}},
+    	                    {name : 'name',index : 'name',width : 90,editable : true,editoptions : {size : 25}},
+    	                    {name : 'amount',index : 'amount',width : 60,align : "right",editable : true,editoptions : {size : 10}},
+    	                    {name : 'tax',index : 'tax',width : 60,align : "right",editable : true,editoptions : {size : 10}},
+    	                    {name : 'total',index : 'total',width : 60,align : "right",editable : true,editoptions : {size : 10}},
+    	                    {name : 'closed',index : 'closed',width : 55,align : 'center',editable : true,edittype : "checkbox",editoptions : {value : "Yes:No"}},
+    	                    {name : 'ship_via',index : 'ship_via',width : 70,editable : true,edittype : "select",editoptions : {value : "FE:FedEx;TN:TNT"}},
+    	                    {name : 'note',index : 'note',width : 100,sortable : false,editable : true,edittype : "textarea",editoptions : {rows : "2",cols : "20"}}
+    	                  ],
+    	        rowNum : 10,
+    	        rowList : [ 10, 20, 30 ],
+    	        pager : '#pagernav',
+    	        sortname : 'id',
+    	        viewrecords : true,
+    	        sortorder : "desc",
+    	        caption : "Navigator Example",
+    	        editurl : "/RowEditing",
+    	        height : 210
+    	      });
+    	  jQuery("#navgrid").jqGrid('navGrid', '#pagernav',
+    	      {}, //options
+    	      {height : 300,reloadAfterSubmit : false}, // edit options
+    	      {height : 300,reloadAfterSubmit : false}, // add options
+    	      {reloadAfterSubmit : false}, // del options
+    	      {}// search options
+    	  );
+    	}
+
+    </script>
+</body>
+</html>
